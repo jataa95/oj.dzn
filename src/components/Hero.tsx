@@ -42,8 +42,8 @@ export function Hero() {
         </h1>
         <div className="hero__row">
           <p className="hero__lede">
-            I&apos;m <strong>Ohjay</strong>, a web designer and developer in Lagos. I design and build fast, editorial websites for brands, artists and
-            businesses, made to turn visitors into enquiries, orders and bookings.
+            <strong>oj.dzn</strong> is a web design and development studio in Lagos. We design and build fast, editorial websites for brands,
+            artists and businesses, made to turn visitors into enquiries, orders and bookings.
           </p>
           <div className="hero__ctas">
             <CtaButton>Book a free 30-min call</CtaButton>
