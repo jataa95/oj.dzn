@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter_Tight, Caveat } from "next/font/google";
 import { site, projects, faqs } from "@/content/site";
+import { Preloader } from "@/components/Preloader";
 import "./globals.css";
 
 const sans = Inter_Tight({ variable: "--font-sans", subsets: ["latin"], display: "swap" });
@@ -46,8 +47,16 @@ const jsonLd = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${sans.variable} ${hand.variable}`}>
+    <html lang="en" className={`${sans.variable} ${hand.variable}`} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(!sessionStorage.getItem("ojdzn-intro")&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("preloading")}catch(e){}`,
+          }}
+        />
+      </head>
       <body>
+        <Preloader />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         {children}
       </body>

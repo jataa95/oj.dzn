@@ -42,12 +42,7 @@ export function Work() {
                   </a>
                 </div>
                 <a className="case__visual" href={p.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${p.name} live site`}>
-                  <span className="case__desk">
-                    <Image src={`/work/${p.slug}-desktop.webp`} alt={`${p.name} desktop homepage`} fill sizes="(max-width: 900px) 90vw, 600px" />
-                  </span>
-                  <span className="case__phone">
-                    <Image src={`/work/${p.slug}-mobile.webp`} alt={`${p.name} on mobile`} fill sizes="160px" />
-                  </span>
+                  <Image src={`/work/${p.slug}-mockup.webp`} alt={`${p.name} website on desktop and mobile`} fill sizes="(max-width: 900px) 92vw, 680px" />
                 </a>
               </article>
             </li>
