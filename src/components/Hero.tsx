@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { heroWords, projects } from "@/content/site";
-import { CtaButton, GhostButton } from "./ui";
+import { CtaButton } from "./ui";
 import { LagosTime } from "./Nav";
 
 function useCycle(length: number, ms: number) {
@@ -99,12 +99,11 @@ export function Hero() {
         </h1>
 
         <p className="hero__lede enter" style={{ "--e": 3 } as React.CSSProperties}>
-          <strong>oj.dzn</strong> is a web design and development studio in Lagos. We design and build fast, editorial websites for brands, artists
-          and businesses, made to turn visitors into enquiries, orders and bookings.
+          We&apos;re a web design and development studio in Lagos, building fast, editorial websites for brands, artists and businesses, made
+          to turn visitors into enquiries, orders and bookings.
         </p>
         <div className="hero__ctas enter" style={{ "--e": 4 } as React.CSSProperties}>
-          <CtaButton>Book a free 30-min call</CtaButton>
-          <GhostButton href="#work">See the work</GhostButton>
+          <CtaButton>Start your project</CtaButton>
         </div>
       </div>
 

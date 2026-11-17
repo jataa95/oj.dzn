@@ -2,17 +2,23 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const MIN_MS = 1500;
-const MAX_MS = 4500;
+const MIN_MS = 1700;
+const MAX_MS = 5000;
+const WORDS = ["Strategy", "Design", "Development", "Launch"];
+const PANELS = 5;
+
+type Phase = "loading" | "complete" | "leaving" | "done";
 
 /**
- * Full-screen intro: the bolt fills with cream while a counter runs to 100,
- * then the curtain lifts. An inline script in <head> adds `html.preloading`
- * (once per session, skipped for reduced motion), so without JS nothing hides the page.
+ * Intro: the bolt mark draws itself in cream while the studio's process words tick
+ * by and a hairline bar fills. At 100% the mark fills solid, then five panels lift
+ * away in a stagger to reveal the hero. An inline script in <head> adds
+ * `html.preloading` (once per session, skipped for reduced motion), so without JS
+ * nothing ever hides the page.
  */
 export function Preloader() {
-  const [count, setCount] = useState(0);
-  const [phase, setPhase] = useState<"loading" | "leaving" | "done">("loading");
+  const [progress, setProgress] = useState(0);
+  const [phase, setPhase] = useState<Phase>("loading");
   const loaded = useRef(false);
 
   useEffect(() => {
@@ -25,56 +31,78 @@ export function Preloader() {
     if (document.readyState === "complete") loaded.current = true;
     else window.addEventListener("load", onLoad, { once: true });
 
+    const timers: ReturnType<typeof setTimeout>[] = [];
     const start = performance.now();
     let raf = 0;
     let shown = 0;
     const step = (now: number) => {
       const t = now - start;
       const ready = (loaded.current && t > MIN_MS) || t > MAX_MS;
-      const target = ready ? 100 : Math.min(90, (t / MIN_MS) * 90);
-      shown += (target - shown) * (ready ? 0.18 : 0.08);
-      if (ready && shown > 99.5) shown = 100;
-      setCount(Math.round(shown));
-      if (shown < 100) raf = requestAnimationFrame(step);
-      else {
-        setPhase("leaving");
+      const target = ready ? 1 : Math.min(0.9, (t / MIN_MS) * 0.9);
+      shown += (target - shown) * (ready ? 0.14 : 0.07);
+      if (ready && shown > 0.996) shown = 1;
+      setProgress(shown);
+      if (shown < 1) {
+        raf = requestAnimationFrame(step);
+        return;
+      }
+      setPhase("complete");
+      timers.push(setTimeout(() => setPhase("leaving"), 650));
+      timers.push(
         setTimeout(() => {
           html.classList.remove("preloading");
           try {
             sessionStorage.setItem("ojdzn-intro", "1");
           } catch {}
-        }, 450);
-        setTimeout(() => setPhase("done"), 1500);
-      }
+        }, 1050),
+      );
+      timers.push(setTimeout(() => setPhase("done"), 2300));
     };
     raf = requestAnimationFrame(step);
     return () => {
       cancelAnimationFrame(raf);
+      timers.forEach(clearTimeout);
       window.removeEventListener("load", onLoad);
     };
   }, []);
 
   if (phase === "done") return null;
 
+  const word = Math.min(WORDS.length - 1, Math.floor(progress * WORDS.length));
+  const pct = Math.round(progress * 100);
+
   return (
-    <div className={`preloader ${phase === "leaving" ? "is-leaving" : ""}`} aria-hidden="true" style={{ "--fill": `${count}%` } as React.CSSProperties}>
-      <div className="preloader__mark">
-        <svg viewBox="0 0 440 440" className="preloader__ghost">
-          <circle cx="220" cy="220" r="218" fill="none" stroke="rgba(239,225,206,.25)" strokeWidth="2" />
-          <path d="M265 15 98 243h114l-40 172 166-228H232z" fill="none" stroke="rgba(239,225,206,.25)" strokeWidth="3" />
-        </svg>
-        <svg viewBox="0 0 440 440" className="preloader__fill">
-          <circle cx="220" cy="220" r="220" fill="#EFE1CE" />
-          <path fill="#333333" d="M265 15 98 243h114l-40 172 166-228H232z" />
-        </svg>
+    <div className={`preloader is-${phase}`} aria-hidden="true" style={{ "--p": progress } as React.CSSProperties}>
+      <div className="preloader__panels">
+        {Array.from({ length: PANELS }, (_, i) => (
+          <i key={i} style={{ "--i": i } as React.CSSProperties} />
+        ))}
       </div>
-      <p className="preloader__brand">
-        oj.dzn <span>Web design &amp; development studio</span>
-      </p>
-      <p className="preloader__count">
-        {String(count).padStart(3, "0")}
-        <span>%</span>
-      </p>
+
+      <div className="preloader__content">
+        <div className="preloader__mark">
+          <svg viewBox="0 0 440 440">
+            <circle className="preloader__fillc" cx="220" cy="220" r="219" />
+            <circle className="preloader__ring" cx="220" cy="220" r="218" pathLength={1} />
+            <path className="preloader__bolt" d="M265 15 98 243h114l-40 172 166-228H232z" pathLength={1} />
+          </svg>
+        </div>
+        <div className="preloader__words">
+          {WORDS.map((w, i) => (
+            <span key={w} className={i === word ? "is-active" : i < word ? "is-past" : ""}>
+              {w}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="preloader__foot">
+        <p className="preloader__brand">oj.dzn</p>
+        <p className="preloader__count">{String(pct).padStart(3, "0")}</p>
+      </div>
+      <div className="preloader__bar">
+        <span />
+      </div>
     </div>
   );
 }

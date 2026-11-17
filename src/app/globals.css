@@ -576,71 +576,145 @@ html.preloading .preloader,
   position: fixed;
   inset: 0;
   z-index: 200;
-  display: grid;
-  place-items: center;
-  background: var(--deep);
+  display: block;
   color: var(--ink);
 }
-.preloader.is-leaving {
-  transform: translateY(-100%);
-  border-radius: 0 0 50% 50% / 0 0 12% 12%;
-  transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1) 0.15s, border-radius 1s cubic-bezier(0.76, 0, 0.24, 1) 0.15s;
-}
-.preloader__mark {
-  position: relative;
-  width: clamp(96px, 12vw, 140px);
-  aspect-ratio: 1;
-  animation: plIn 0.9s var(--ease) both;
-}
-.preloader.is-leaving .preloader__mark {
-  scale: 0.85;
-  opacity: 0;
-  transition: scale 0.6s var(--ease), opacity 0.4s;
-}
-.preloader__mark svg {
+.preloader__panels {
   position: absolute;
   inset: 0;
+  display: flex;
+}
+.preloader__panels i {
+  flex: 1;
+  margin-right: -1px;
+  background: var(--deep);
+  transition: transform 0.95s cubic-bezier(0.76, 0, 0.24, 1);
+  transition-delay: calc(var(--i) * 70ms);
+}
+.preloader.is-leaving .preloader__panels i {
+  transform: translateY(-101%);
+}
+.preloader__content {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 28px;
+  transition: opacity 0.5s var(--ease), transform 0.8s var(--ease);
+}
+.preloader.is-leaving .preloader__content,
+.preloader.is-leaving .preloader__foot,
+.preloader.is-leaving .preloader__bar {
+  opacity: 0;
+  transform: translateY(-40px);
+}
+.preloader__mark {
+  width: clamp(92px, 11vw, 128px);
+  aspect-ratio: 1;
+  animation: plIn 1s var(--ease) both;
+}
+.preloader__mark svg {
   width: 100%;
   height: 100%;
-}
-.preloader__fill {
-  clip-path: inset(calc(100% - var(--fill)) 0 0 0);
-  transition: clip-path 0.15s linear;
+  overflow: visible;
 }
 @keyframes plIn {
   from {
     opacity: 0;
-    transform: scale(0.8) rotate(-30deg);
+    transform: scale(0.85);
   }
 }
-.preloader__brand {
+.preloader__ring,
+.preloader__bolt {
+  fill: none;
+  stroke: var(--ink);
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+}
+.preloader__ring {
+  stroke-width: 2;
+  stroke-dashoffset: calc(1 - var(--p));
+  transform: rotate(-90deg);
+  transform-origin: center;
+}
+.preloader__bolt {
+  stroke-width: 3;
+  stroke-dashoffset: calc(1 - clamp(0, (var(--p) - 0.15) * 1.25, 1));
+  transition: fill 0.5s var(--ease) 0.15s, stroke 0.5s;
+}
+.preloader__fillc {
+  fill: var(--ink);
+  transform: scale(0);
+  transform-origin: center;
+  transition: transform 0.7s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+.preloader.is-complete .preloader__fillc,
+.preloader.is-leaving .preloader__fillc {
+  transform: scale(1);
+}
+.preloader.is-complete .preloader__bolt,
+.preloader.is-leaving .preloader__bolt {
+  fill: var(--panel);
+  stroke: var(--panel);
+}
+.preloader__words {
+  display: grid;
+  height: 1.3em;
+  overflow: hidden;
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.preloader__words span {
+  grid-area: 1 / 1;
+  text-align: center;
+  transform: translateY(110%);
+  transition: transform 0.6s var(--ease);
+}
+.preloader__words span.is-active {
+  transform: none;
+}
+.preloader__words span.is-past {
+  transform: translateY(-110%);
+}
+.preloader__foot {
   position: absolute;
   left: var(--pad);
-  bottom: clamp(20px, 4vh, 40px);
-  font-size: 15px;
+  right: var(--pad);
+  bottom: clamp(26px, 5vh, 44px);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 13px;
+  transition: opacity 0.4s, transform 0.6s var(--ease);
+}
+.preloader__brand {
   font-weight: 600;
   letter-spacing: -0.02em;
 }
-.preloader__brand span {
-  display: block;
-  font-size: 13px;
-  font-weight: 400;
+.preloader__count {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
   color: var(--muted);
 }
-.preloader__count {
+.preloader__bar {
   position: absolute;
+  left: var(--pad);
   right: var(--pad);
-  bottom: clamp(12px, 3vh, 30px);
-  font-size: clamp(56px, 9vw, 120px);
-  line-height: 1;
-  letter-spacing: -0.06em;
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
+  bottom: clamp(16px, 3.4vh, 30px);
+  height: 1px;
+  background: var(--line);
+  overflow: hidden;
+  transition: opacity 0.4s;
 }
-.preloader__count span {
-  font-size: 0.35em;
-  color: var(--faint);
-  margin-left: 4px;
+.preloader__bar span {
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  transform: scaleX(var(--p));
+  transform-origin: left;
 }
 
 /* ==========================================================================
@@ -738,8 +812,8 @@ html.preloading .wall__plane {
   inset: 0;
   z-index: -2;
   background:
-    radial-gradient(ellipse 60% 55% at 50% 48%, rgba(25, 25, 25, 0.96) 0%, rgba(25, 25, 25, 0.86) 45%, rgba(25, 25, 25, 0.45) 75%, rgba(25, 25, 25, 0.25) 100%),
-    linear-gradient(to bottom, rgba(25, 25, 25, 0.9) 0%, transparent 22%, transparent 70%, var(--canvas) 100%);
+    radial-gradient(ellipse 65% 60% at 50% 48%, rgba(25, 25, 25, 0.97) 0%, rgba(25, 25, 25, 0.92) 45%, rgba(25, 25, 25, 0.78) 75%, rgba(25, 25, 25, 0.66) 100%),
+    linear-gradient(to bottom, rgba(25, 25, 25, 0.92) 0%, rgba(25, 25, 25, 0.3) 24%, rgba(25, 25, 25, 0.3) 66%, var(--canvas) 100%);
 }
 .hero__spot {
   position: absolute;
@@ -831,11 +905,9 @@ html.preloading .enter {
 .rotator__word {
   grid-area: 1 / 1;
   white-space: nowrap;
-  font-family: var(--font-serif), Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.035em;
-  background: linear-gradient(180deg, #fff3e2 0%, var(--ink) 45%, #9b9286 110%);
+  padding-bottom: 0.16em;
+  margin-bottom: -0.16em;
+  background: linear-gradient(180deg, #d9ccba 0%, #8c847a 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -944,8 +1016,8 @@ html.preloading .enter {
   }
   .hero__veil {
     background:
-      radial-gradient(ellipse 90% 50% at 50% 50%, rgba(25, 25, 25, 0.95) 0%, rgba(25, 25, 25, 0.8) 55%, rgba(25, 25, 25, 0.45) 100%),
-      linear-gradient(to bottom, rgba(25, 25, 25, 0.9) 0%, transparent 25%, transparent 70%, var(--canvas) 100%);
+      radial-gradient(ellipse 95% 55% at 50% 50%, rgba(25, 25, 25, 0.97) 0%, rgba(25, 25, 25, 0.88) 55%, rgba(25, 25, 25, 0.7) 100%),
+      linear-gradient(to bottom, rgba(25, 25, 25, 0.92) 0%, rgba(25, 25, 25, 0.3) 25%, rgba(25, 25, 25, 0.3) 66%, var(--canvas) 100%);
   }
   .hero__bar {
     grid-template-columns: 1fr;

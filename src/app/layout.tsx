@@ -1,11 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Inter_Tight, Caveat, Instrument_Serif } from "next/font/google";
+import { Inter_Tight, Caveat } from "next/font/google";
 import { site, projects, faqs } from "@/content/site";
 import { Preloader } from "@/components/Preloader";
 import "./globals.css";
 
 const sans = Inter_Tight({ variable: "--font-sans", subsets: ["latin"], display: "swap" });
-const serif = Instrument_Serif({ variable: "--font-serif", subsets: ["latin"], weight: "400", style: ["normal", "italic"], display: "swap" });
 const hand = Caveat({ variable: "--font-hand", subsets: ["latin"], weight: ["500", "600"], display: "swap" });
 
 const title = "oj.dzn — Premium websites for brands that want to be taken seriously";
@@ -48,7 +47,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${sans.variable} ${serif.variable} ${hand.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${sans.variable} ${hand.variable}`} suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
