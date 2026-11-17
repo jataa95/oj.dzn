@@ -915,54 +915,45 @@ html.preloading .enter {
   -webkit-backdrop-filter: blur(10px);
 }
 
-.trusted {
-  display: grid;
-  justify-items: center;
-  gap: 16px;
-  width: min(760px, 100%);
+.stats {
+  display: flex;
+  justify-content: center;
   margin-top: var(--gap);
 }
-.trusted__label {
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+.stats li {
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+  align-content: start;
+  padding-inline: clamp(20px, 3.4vw, 44px);
+}
+.stats li + li {
+  border-left: 1px solid var(--line);
+}
+.stats strong {
+  font-size: clamp(30px, 3.2vw, 42px);
+  line-height: 1;
+  letter-spacing: -0.045em;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.stats em {
+  font-style: normal;
   color: var(--faint);
 }
-.trusted__viewport {
-  width: 100%;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent);
+.stats li > span {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  text-align: center;
+  text-wrap: balance;
 }
-.trusted__track {
-  display: flex;
-  width: max-content;
-  animation: trusted 36s linear infinite;
-}
-.trusted:hover .trusted__track {
-  animation-play-state: paused;
-}
-.trusted__track li {
-  display: inline-flex;
-  align-items: center;
-  gap: 34px;
-  padding-right: 34px;
-  font-size: clamp(17px, 1.6vw, 21px);
-  font-weight: 500;
-  letter-spacing: -0.03em;
-  white-space: nowrap;
-  color: rgba(239, 225, 206, 0.55);
-}
-.trusted__track li::after {
-  content: "";
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--faint);
-}
-@keyframes trusted {
-  to {
-    transform: translateX(-50%);
+@media (max-width: 420px) {
+  .stats li {
+    padding-inline: 14px;
+  }
+  .stats li > span {
+    font-size: 11px;
   }
 }
 
@@ -1952,8 +1943,7 @@ html.preloading .enter {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-  .wall__col,
-  .trusted__track {
+  .wall__col {
     animation: none !important;
   }
   .reveal,
@@ -1980,6 +1970,9 @@ html.preloading .enter {
     margin-top: calc(var(--gap) - 17px);
   }
   .hero__ctas {
+    margin-top: calc(var(--gap) - 5px);
+  }
+  .stats {
     margin-top: calc(var(--gap) - 5px);
   }
 }

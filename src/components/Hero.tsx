@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import { projects } from "@/content/site";
 import { CtaButton } from "./ui";
 import { LagosTime } from "./Nav";
+import { Stats } from "./Stats";
 
 /** Columns for the background wall: alternate desktop and mobile shots, offset per column. */
 const columns = Array.from({ length: 6 }, (_, c) =>
@@ -83,17 +84,8 @@ export function Hero() {
           <CtaButton>Start your project</CtaButton>
         </div>
 
-        <div className="trusted enter" style={{ "--e": 5 } as React.CSSProperties}>
-          <p className="trusted__label">Trusted by</p>
-          <div className="trusted__viewport">
-            <ul className="trusted__track">
-              {[...projects, ...projects].map((x, i) => (
-                <li key={i} aria-hidden={i >= projects.length}>
-                  {x.name}
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div className="enter" style={{ "--e": 5 } as React.CSSProperties}>
+          <Stats />
         </div>
       </div>
 
@@ -102,7 +94,7 @@ export function Hero() {
           <span className="badge__dot" /> Taking new projects · <LagosTime />
         </p>
         <p className="hero__count">
-          <strong>{String(projects.length).padStart(2, "0")}</strong> live launches · 2026
+          Design · Build · Launch
         </p>
       </div>
     </section>

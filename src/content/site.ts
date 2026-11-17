@@ -279,3 +279,10 @@ export const faqs = [
 
 export const industries = ["Real estate", "Fashion labels", "Interior studios", "Fine artists", "Churches", "Streetwear", "Painters", "Personal brands"];
 
+
+// Hero stats. `value` is counted up from 0; `suffix` is shown after it.
+export const stats = [
+  { value: 5, suffix: "+", label: "Years of experience" },
+  { value: 20, suffix: "+", label: "Projects launched" },
+  { value: 100, suffix: "%", label: "Custom‑designed" },
+];
