@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { heroWords, projects, site } from "@/content/site";
 import { CtaButton, GhostButton } from "./ui";
+import { BoltMark } from "./Logo";
 
 function useCycle(length: number, ms: number) {
   const [i, setI] = useState(0);
@@ -23,6 +24,10 @@ export function Hero() {
   return (
     <section className="hero" id="top">
       <div className="wrap">
+        <div className="hero__mark">
+          <BoltMark size={88} />
+          <span className="sr-only">oj.dzn</span>
+        </div>
         <p className="badge">
           <span className="badge__dot" /> Taking new projects · {site.location}
         </p>

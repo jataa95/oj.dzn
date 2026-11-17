@@ -11,7 +11,7 @@ const types = ["New website", "Redesign", "Online shop", "Portfolio", "Landing p
 export function Contact() {
   const [type, setType] = useState(types[0]);
   const [sent, setSent] = useState(false);
-  const wa = whatsappLink("Hi Ohjay, I'd like to talk about a website.");
+  const wa = whatsappLink("Hi oj.dzn, I'd like to talk about a website.");
 
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -79,7 +79,7 @@ export function Contact() {
                 </select>
               </label>
               <label className="brief__full">
-                <span>Tell me about the project</span>
+                <span>Tell us about the project</span>
                 <textarea name="message" rows={3} placeholder="What you do, who it's for, and what the website should achieve." />
               </label>
             </div>
@@ -106,7 +106,7 @@ export function Contact() {
             </li>
           </ul>
           <p>
-            © 2026 {site.person} · {site.location}
+            © 2026 {site.name} · {site.location}
           </p>
         </footer>
       </div>

@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Hand } from "./ui";
 
 const text =
-  "I help ambitious brands trade tired templates for websites that feel expensive, load fast and quietly turn visitors into enquiries, orders and bookings.";
+  "We help ambitious brands trade tired templates for websites that feel expensive, load fast and quietly turn visitors into enquiries, orders and bookings.";
 
 /** Words sharpen from blurred grey to ink as the paragraph scrolls through the viewport. */
 export function Statement() {
@@ -39,9 +39,9 @@ export function Statement() {
   }, []);
 
   return (
-    <section className="statement" aria-label="What I do">
+    <section className="statement" aria-label="What we do">
       <div className="wrap statement__inner">
-        <Hand className="statement__hand">What I do</Hand>
+        <Hand className="statement__hand">What we do</Hand>
         <p ref={ref} className="statement__text">
           <span className="sr-only">{text}</span>
           {words.map((w, i) => {

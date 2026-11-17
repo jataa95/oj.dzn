@@ -8,7 +8,7 @@ const hand = Caveat({ variable: "--font-hand", subsets: ["latin"], weight: ["500
 
 const title = "oj.dzn — Premium websites for brands that want to be taken seriously";
 const description =
-  "Ohjay (Olajide Oladunni) designs and builds fast, editorial websites for Nigerian brands, artists and businesses — built to turn visitors into enquiries, orders and bookings.";
+  "oj.dzn is a web design and development studio in Lagos. We design and build fast, editorial websites for brands, artists and businesses, built to turn visitors into enquiries, orders and bookings.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),

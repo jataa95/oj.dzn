@@ -183,11 +183,11 @@ export const comparison = {
   columns: ["DIY template", "Big agency", "oj.dzn"],
   rows: [
     { label: "Custom design for your brand", values: [false, true, true] },
-    { label: "One person from brief to launch", values: [false, false, true] },
+    { label: "One point of contact from brief to launch", values: [false, false, true] },
     { label: "You don't build it yourself", values: [false, true, true] },
     { label: "Built to get enquiries, not just look nice", values: [false, true, true] },
     { label: "Fast, no long approval chains", values: [true, false, true] },
-    { label: "Website and graphics from one designer", values: [false, false, true] },
+    { label: "Website and graphics from one studio", values: [false, false, true] },
   ],
 };
 
@@ -253,27 +253,27 @@ export const faqs = [
   },
   {
     q: "How much does a website cost?",
-    a: "Every project is quoted on its scope. Book a free 30-minute call, tell me what you need, and you'll get a clear quote with no surprises.",
+    a: "Every project is quoted on its scope. Book a free 30-minute call, tell us what you need, and you'll get a clear quote with no surprises.",
   },
   {
     q: "Can I update the website myself?",
-    a: "Yes. If you need to change products, events, listings or posts often, I set up an easy CMS and walk you through it at launch.",
+    a: "Yes. If you need to change products, events, listings or posts often, we set up an easy CMS and walk you through it at launch.",
   },
   {
     q: "Do you write the words too?",
-    a: "I help shape the structure and copy so every page leads to an action: a booking, an order, an enquiry. You bring the knowledge of your business; I make it read well.",
+    a: "We help shape the structure and copy so every page leads to an action: a booking, an order, an enquiry. You bring the knowledge of your business; we make it read well.",
   },
   {
     q: "Do you handle domain and hosting?",
-    a: "Yes. I can set up your domain, hosting and business email, or connect the site to what you already have.",
+    a: "Yes. We can set up your domain, hosting and business email, or connect the site to what you already have.",
   },
   {
     q: "Do you also design flyers and social posts?",
-    a: "Yes. I'm a graphic designer too, so launch graphics, flyers and social posts can match your new website exactly.",
+    a: "Yes. We design graphics too, so launch graphics, flyers and social posts can match your new website exactly.",
   },
   {
     q: "Do you only work with businesses in Nigeria?",
-    a: "I'm based in Lagos and most of my clients are Nigerian brands, artists and businesses, but I work with anyone, anywhere, online.",
+    a: "We're based in Lagos and most of our clients are Nigerian brands, artists and businesses, but we work with anyone, anywhere, online.",
   },
 ];
 

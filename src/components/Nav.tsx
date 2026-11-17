@@ -43,7 +43,7 @@ export function Nav() {
   return (
     <header className={`nav ${scrolled ? "nav--scrolled" : ""} ${open ? "nav--open" : ""}`}>
       <div className="nav__bar wrap">
-        <a href="#top" className="nav__logo" aria-label="oj.dzn home" onClick={() => setOpen(false)}>
+        <a href="#top" className={`nav__logo ${showActions ? "is-visible" : ""}`} aria-label="oj.dzn home" inert={!showActions} onClick={() => setOpen(false)}>
           <Logo />
         </a>
         <div className={`nav__actions ${showActions ? "is-visible" : ""}`} inert={!showActions}>
