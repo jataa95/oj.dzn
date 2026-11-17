@@ -16,51 +16,64 @@ function useCycle(length: number, ms: number) {
   return i;
 }
 
+/** Columns for the background wall: alternate desktop and mobile shots, offset per column. */
+const columns = Array.from({ length: 6 }, (_, c) =>
+  Array.from({ length: 5 }, (_, r) => {
+    const p = projects[(c * 2 + r * 3) % projects.length];
+    const mobile = (c + r) % 3 === 1;
+    return { slug: p.slug, name: p.name, mobile };
+  }),
+);
+
 export function Hero() {
   const w = useCycle(heroWords.length, 2800);
-  const s = useCycle(projects.length, 3400);
-  const p = projects[s];
-  const stageRef = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLElement>(null);
 
-  // The showcase starts tilted back and flattens as it scrolls into view.
+  // Pointer parallax for the wall + a soft spotlight that follows the cursor.
   useEffect(() => {
-    const el = stageRef.current;
-    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const el = ref.current;
+    if (!el || window.matchMedia("(prefers-reduced-motion: reduce), (pointer: coarse)").matches) return;
     let raf = 0;
-    const update = () => {
-      const r = el.getBoundingClientRect();
-      const vh = window.innerHeight;
-      const t = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.9)));
-      el.style.setProperty("--tilt", `${(1 - t) * 16}deg`);
-      el.style.setProperty("--lift", `${(1 - t) * 40}px`);
-    };
-    const onScroll = () => {
+    const onMove = (e: PointerEvent) => {
       cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(update);
+      raf = requestAnimationFrame(() => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width;
+        const y = (e.clientY - r.top) / r.height;
+        el.style.setProperty("--mx", (x - 0.5).toFixed(3));
+        el.style.setProperty("--my", (y - 0.5).toFixed(3));
+        el.style.setProperty("--sx", `${(x * 100).toFixed(1)}%`);
+        el.style.setProperty("--sy", `${(y * 100).toFixed(1)}%`);
+      });
     };
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    el.addEventListener("pointermove", onMove);
     return () => {
       cancelAnimationFrame(raf);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      el.removeEventListener("pointermove", onMove);
     };
   }, []);
 
   return (
-    <section className="hero" id="top">
-      <div className="hero__glow" aria-hidden="true" />
-      <div className="hero__guides wrap" aria-hidden="true">
-        <i />
-        <i />
+    <section ref={ref} className="hero" id="top">
+      <div className="wall" aria-hidden="true">
+        <div className="wall__plane">
+          {columns.map((col, c) => (
+            <div key={c} className={`wall__col ${c % 2 ? "wall__col--down" : ""}`} style={{ "--dur": `${46 + c * 7}s` } as React.CSSProperties}>
+              {[...col, ...col].map((t, i) => (
+                <div key={i} className={`wall__card ${t.mobile ? "wall__card--m" : ""}`}>
+                  <Image src={`/work/${t.slug}-${t.mobile ? "mobile" : "desktop"}.webp`} alt="" fill sizes={t.mobile ? "160px" : "360px"} />
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
+      <div className="hero__veil" aria-hidden="true" />
+      <div className="hero__spot" aria-hidden="true" />
 
       <div className="wrap hero__inner">
-        <p className="badge enter" style={{ "--e": 0 } as React.CSSProperties}>
-          <span className="badge__dot" /> Taking new projects
-          <span className="badge__sep" />
-          <LagosTime />
+        <p className="hero__eyebrow enter" style={{ "--e": 0 } as React.CSSProperties}>
+          <span className="badge__dot" /> Web design &amp; development studio
         </p>
 
         <h1 className="hero__title">
@@ -85,87 +98,27 @@ export function Hero() {
           </span>
         </h1>
 
-        <div className="hero__row">
-          <p className="hero__lede enter" style={{ "--e": 3 } as React.CSSProperties}>
-            <strong>oj.dzn</strong> is a web design and development studio in Lagos. We design and build fast, editorial websites for brands,
-            artists and businesses, made to turn visitors into enquiries, orders and bookings.
-          </p>
-          <div className="hero__ctas enter" style={{ "--e": 4 } as React.CSSProperties}>
-            <CtaButton>Book a free 30-min call</CtaButton>
-            <GhostButton href="#work">See the work</GhostButton>
-          </div>
-          <ul className="hero__meta enter" style={{ "--e": 5 } as React.CSSProperties}>
-            <li>Design</li>
-            <li>Development</li>
-            <li>SEO &amp; speed</li>
-            <li>Brand visuals</li>
-          </ul>
+        <p className="hero__lede enter" style={{ "--e": 3 } as React.CSSProperties}>
+          <strong>oj.dzn</strong> is a web design and development studio in Lagos. We design and build fast, editorial websites for brands, artists
+          and businesses, made to turn visitors into enquiries, orders and bookings.
+        </p>
+        <div className="hero__ctas enter" style={{ "--e": 4 } as React.CSSProperties}>
+          <CtaButton>Book a free 30-min call</CtaButton>
+          <GhostButton href="#work">See the work</GhostButton>
         </div>
+      </div>
 
-        <div ref={stageRef} className="stage enter" style={{ "--e": 6 } as React.CSSProperties}>
-          <div className="browser">
-            <div className="browser__bar">
-              <span className="browser__dots">
-                <i />
-                <i />
-                <i />
-              </span>
-              <span className="browser__url">
-                <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
-                  <path d="M2.5 4.5V3a2.5 2.5 0 0 1 5 0v1.5M2 4.5h6v4.5H2z" fill="none" stroke="currentColor" strokeWidth="1" />
-                </svg>
-                {p.url.replace("https://", "").replace(/\/$/, "")}
-              </span>
-              <a className="browser__open" href={p.url} target="_blank" rel="noopener noreferrer">
-                Visit ↗
-              </a>
-            </div>
-            <div className="browser__view">
-              {projects.map((x, n) => (
-                <Image
-                  key={x.slug}
-                  src={`/work/${x.slug}-desktop.webp`}
-                  alt={`${x.name} website homepage`}
-                  fill
-                  sizes="(max-width: 1300px) 94vw, 1220px"
-                  className={n === s ? "is-active" : ""}
-                  priority={n === 0}
-                />
-              ))}
-            </div>
-          </div>
-
-          <div className="stage__phone" aria-hidden="true">
-            {projects.map((x, n) => (
-              <Image key={x.slug} src={`/work/${x.slug}-mobile.webp`} alt="" fill sizes="200px" className={n === s ? "is-active" : ""} />
-            ))}
-          </div>
-
-          <div className="stage__chip">
-            <span className="stage__live" /> Live
-            <strong>{p.name}</strong>
-            <em>{p.industry}</em>
-          </div>
-
-          <div className="stage__progress" aria-hidden="true">
-            {projects.map((x, n) => (
-              <i key={x.slug} className={n === s ? "is-active" : n < s ? "is-past" : ""} />
-            ))}
-          </div>
-        </div>
-
-        <div className="clients">
-          <p>Recent launches</p>
-          <ul>
-            {projects.map((x) => (
-              <li key={x.slug}>
-                <a href={x.url} target="_blank" rel="noopener noreferrer">
-                  {x.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+      <div className="hero__bar wrap enter" style={{ "--e": 6 } as React.CSSProperties}>
+        <p className="hero__status">
+          <span className="badge__dot" /> Taking new projects · <LagosTime />
+        </p>
+        <a href="#work" className="hero__scroll" aria-label="Scroll to work">
+          <span>Scroll</span>
+          <i />
+        </a>
+        <p className="hero__count">
+          <strong>{String(projects.length).padStart(2, "0")}</strong> live launches · 2026
+        </p>
       </div>
     </section>
   );
