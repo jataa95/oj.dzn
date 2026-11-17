@@ -82,16 +82,25 @@ export function Hero() {
         <div className="hero__ctas enter" style={{ "--e": 4 } as React.CSSProperties}>
           <CtaButton>Start your project</CtaButton>
         </div>
+
+        <div className="trusted enter" style={{ "--e": 5 } as React.CSSProperties}>
+          <p className="trusted__label">Trusted by</p>
+          <div className="trusted__viewport">
+            <ul className="trusted__track">
+              {[...projects, ...projects].map((x, i) => (
+                <li key={i} aria-hidden={i >= projects.length}>
+                  {x.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
 
       <div className="hero__bar wrap enter" style={{ "--e": 6 } as React.CSSProperties}>
         <p className="hero__status">
           <span className="badge__dot" /> Taking new projects · <LagosTime />
         </p>
-        <a href="#work" className="hero__scroll" aria-label="Scroll to work">
-          <span>Scroll</span>
-          <i />
-        </a>
         <p className="hero__count">
           <strong>{String(projects.length).padStart(2, "0")}</strong> live launches · 2026
         </p>
