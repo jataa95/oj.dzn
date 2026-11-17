@@ -72,14 +72,11 @@ export function Hero() {
       <div className="hero__spot" aria-hidden="true" />
 
       <div className="wrap hero__inner">
-        <p className="hero__eyebrow enter" style={{ "--e": 0 } as React.CSSProperties}>
-          <span className="badge__dot" /> Web design &amp; development studio
-        </p>
 
         <h1 className="hero__title">
           <span className="line">
-            <span className="line__in" style={{ "--e": 1 } as React.CSSProperties}>
-              Websites that
+            <span className="line__in" style={{ "--e": 0 } as React.CSSProperties}>
+              Turn visitors
             </span>
           </span>
           <span className="line">
@@ -99,8 +96,8 @@ export function Hero() {
         </h1>
 
         <p className="hero__lede enter" style={{ "--e": 3 } as React.CSSProperties}>
-          We&apos;re a web design and development studio in Lagos, building fast, editorial websites for brands, artists and businesses, made
-          to turn visitors into enquiries, orders and bookings.
+          We&apos;re a web design and development studio in Lagos. We design and build fast, premium websites for brands, artists and
+          businesses that want to be taken seriously online.
         </p>
         <div className="hero__ctas enter" style={{ "--e": 4 } as React.CSSProperties}>
           <CtaButton>Start your project</CtaButton>

@@ -17,8 +17,8 @@ export default function OpengraphImage() {
           <div style={{ fontSize: 34, fontWeight: 700, letterSpacing: -1 }}>oj.dzn</div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", marginTop: 56, fontSize: 92, lineHeight: 0.95, letterSpacing: -4, fontWeight: 600 }}>
-          <span>Websites that</span>
-          <span>look premium.</span>
+          <span>Turn visitors</span>
+          <span>into customers.</span>
         </div>
         <div style={{ display: "flex", marginTop: "auto", gap: 0 }}>
           {tiles.map((c, i) => (
