@@ -18,11 +18,16 @@ export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
+  // The menu button and CTA only appear once the visitor scrolls past most of the hero.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > window.innerHeight * 0.55);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -33,17 +38,24 @@ export function Nav() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
+  const showActions = scrolled || open;
+
   return (
     <header className={`nav ${scrolled ? "nav--scrolled" : ""} ${open ? "nav--open" : ""}`}>
       <div className="nav__bar wrap">
         <a href="#top" className="nav__logo" aria-label="oj.dzn home" onClick={() => setOpen(false)}>
-          <Logo dark={open} />
+          <Logo />
         </a>
-        <button className="nav__toggle" aria-expanded={open} aria-controls="menu" onClick={() => setOpen((o) => !o)}>
-          <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
-          <i />
-          <i />
-        </button>
+        <div className={`nav__actions ${showActions ? "is-visible" : ""}`} inert={!showActions}>
+          <span className="nav__cta">
+            <CtaButton>Book a call</CtaButton>
+          </span>
+          <button className="nav__toggle" aria-expanded={open} aria-controls="menu" onClick={() => setOpen((o) => !o)}>
+            <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
+            <i />
+            <i />
+          </button>
+        </div>
       </div>
 
       <div className="menu" id="menu" aria-hidden={!open} inert={!open}>

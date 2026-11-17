@@ -27,7 +27,8 @@ export function Hero() {
           <span className="badge__dot" /> Taking new projects · {site.location}
         </p>
         <h1 className="hero__title">
-          Websites that{" "}
+          Websites that
+          <br />
           <span className="rotator">
             <span className="sr-only">{heroWords[0]}</span>
             <span className="rotator__track" aria-hidden="true">

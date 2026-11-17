@@ -7,13 +7,12 @@ export function BoltMark({ size = 32, className }: { size?: number; className?: 
   );
 }
 
-export function Logo({ dark = false }: { dark?: boolean }) {
+/** The brand mark on its own — no wordmark, no background. */
+export function Logo({ size = 38 }: { size?: number }) {
   return (
-    <span className={`logo ${dark ? "logo--dark" : ""}`}>
-      <BoltMark size={34} />
-      <span className="logo__word">
-        oj<span className="logo__dot">.</span>dzn
-      </span>
+    <span className="logo">
+      <BoltMark size={size} />
+      <span className="sr-only">oj.dzn</span>
     </span>
   );
 }
