@@ -119,12 +119,6 @@ export const projects: Project[] = [
   },
 ];
 
-export const earlierWork = [
-  { name: "ArtHaus", note: "Art marketplace", url: "https://arthaus25.webflow.io/" },
-  { name: "Ematec Agency", note: "Digital agency", url: "https://ematec-agency.webflow.io/" },
-  { name: "TeamApp", note: "Group messaging", url: "https://team-app-b80ace.webflow.io/" },
-];
-
 export const painPoints = [
   "Looks like a template",
   "Slow on mobile",

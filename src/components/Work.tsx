@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { earlierWork, projects } from "@/content/site";
-import { Arrow, CtaButton, Hand } from "./ui";
+import { projects } from "@/content/site";
+import { Arrow, Hand } from "./ui";
 import { Reveal } from "./Reveal";
 
 export function Work() {
@@ -54,21 +54,6 @@ export function Work() {
           ))}
         </ol>
 
-        <div className="earlier">
-          <p className="earlier__label">Earlier work</p>
-          <ul>
-            {earlierWork.map((w) => (
-              <li key={w.name}>
-                <a href={w.url} target="_blank" rel="noopener noreferrer">
-                  <strong>{w.name}</strong>
-                  <span>{w.note}</span>
-                  <Arrow />
-                </a>
-              </li>
-            ))}
-          </ul>
-          <CtaButton>Start your project</CtaButton>
-        </div>
       </div>
     </section>
   );

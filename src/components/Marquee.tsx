@@ -1,5 +1,4 @@
 import { industries } from "@/content/site";
-import { BoltMark } from "./Logo";
 
 export function Marquee() {
   const items = [...industries, ...industries];
@@ -9,7 +8,7 @@ export function Marquee() {
       <div className="marquee__track" aria-hidden="true">
         {items.map((x, i) => (
           <span key={i}>
-            {x} <BoltMark size={22} />
+            {x} <i className="marquee__sep" />
           </span>
         ))}
       </div>

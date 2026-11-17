@@ -814,43 +814,6 @@ ol {
   }
 }
 
-.earlier {
-  margin-top: 48px;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 16px 24px;
-  padding-top: 28px;
-  border-top: 1px solid var(--line);
-}
-.earlier__label {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--muted);
-}
-.earlier ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-right: auto;
-}
-.earlier a {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  border-radius: 99px;
-  border: 1px solid var(--line);
-  font-size: 14px;
-  transition: border-color 0.3s;
-}
-.earlier a span {
-  color: var(--muted);
-}
-.earlier a:hover {
-  border-color: var(--ink);
-}
-
 /* ==========================================================================
    Marquee
    ========================================================================== */
@@ -877,9 +840,11 @@ ol {
   white-space: nowrap;
   color: var(--ink-soft);
 }
-.marquee__track svg {
-  width: 20px;
-  height: 20px;
+.marquee__sep {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--faint);
 }
 @keyframes marquee {
   to {
