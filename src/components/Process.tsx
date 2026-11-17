@@ -23,7 +23,7 @@ export function Process() {
             <Reveal as="li" key={s.n} delay={i * 120} className="pcard">
               <div className="pcard__top">
                 <span className="pcard__n">{s.n}</span>
-                <Hand className="pcard__step">{s.title}</Hand>
+                <h3 className="pcard__step">{s.title}</h3>
               </div>
               <ul>
                 {s.points.map((p) => (

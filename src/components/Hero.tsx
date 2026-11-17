@@ -87,6 +87,11 @@ export function Hero() {
         <div className="enter" style={{ "--e": 5 } as React.CSSProperties}>
           <Stats />
         </div>
+
+        <a href="#work" className="hero__cue enter" style={{ "--e": 6 } as React.CSSProperties} aria-label="Scroll to work">
+          <span>Scroll</span>
+          <i />
+        </a>
       </div>
 
       <div className="hero__bar wrap enter" style={{ "--e": 6 } as React.CSSProperties}>

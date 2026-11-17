@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { site } from "@/content/site";
 import { Logo } from "./Logo";
-import { Arrow, CtaButton, Corners, Hand, whatsappLink } from "./ui";
+import { Arrow, CtaButton, Corners, whatsappLink } from "./ui";
 
 const budgets = ["Not sure yet", "Under ₦500k", "₦500k – ₦1.5m", "₦1.5m – ₦3m", "₦3m+"];
 const types = ["New website", "Redesign", "Online shop", "Portfolio", "Landing page", "Graphics"];
@@ -36,7 +36,7 @@ export function Contact() {
           <Corners />
           <div className="contact__intro">
             <h2 id="contact-title" className="h2">Let&apos;s build yours.</h2>
-            <Hand className="contact__hand">One call, a clear plan, a site you&apos;re proud to share</Hand>
+            <p className="contact__sub">One call, a clear plan, a site you&apos;re proud to share.</p>
             <div className="contact__ctas">
               <CtaButton>Book a free 30-min call</CtaButton>
               {wa && (

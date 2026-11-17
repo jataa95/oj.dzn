@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Hand } from "./ui";
 
 const text =
-  "We help ambitious brands trade tired templates for websites that feel expensive, load fast and quietly turn visitors into enquiries, orders and bookings.";
+  "We help ambitious brands step out of the DMs and into websites that feel expensive, load fast and quietly turn visitors into enquiries, orders and bookings.";
 
 /** Words sharpen from blurred grey to ink as the paragraph scrolls through the viewport. */
 export function Statement() {

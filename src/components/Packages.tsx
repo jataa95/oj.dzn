@@ -19,12 +19,12 @@ export function Packages() {
           {packages.map((p, i) => (
             <Reveal key={p.name} delay={i * 100} className={`pkg ${p.featured ? "pkg--featured" : ""}`}>
               <div className="pkg__head">
-                {p.featured && <Hand className="pkg__flag">Most popular</Hand>}
+                {p.featured && <span className="pkg__flag">Most popular</span>}
                 <h3>{p.name}</h3>
                 <p>{p.for}</p>
               </div>
               <div className="pkg__body">
-                <p className="pkg__price">{p.price ?? "Quote on call"}</p>
+                {p.price && <p className="pkg__price">{p.price}</p>}
                 <ul>
                   {p.features.map((f) => (
                     <li key={f}>{f}</li>

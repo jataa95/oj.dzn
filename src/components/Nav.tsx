@@ -42,8 +42,16 @@ export function Nav() {
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let raf = 0;
+    let lastY = window.scrollY;
     const update = () => {
       const y = window.scrollY;
+      const el0 = markRef.current;
+      if (el0 && !document.documentElement.classList.contains("menu-open")) {
+        // Tuck the mark away while reading down the page; bring it back on scroll up.
+        if (y > window.innerHeight * 0.8 && y > lastY + 6) el0.classList.add("is-hidden");
+        else if (y < lastY - 6 || y < window.innerHeight * 0.8) el0.classList.remove("is-hidden");
+      }
+      lastY = y;
       const p = Math.min(1, y / 320);
       setScrolled(y > window.innerHeight * 0.55);
       const el = markRef.current;
@@ -68,6 +76,7 @@ export function Nav() {
 
   useEffect(() => {
     document.documentElement.classList.toggle("menu-open", open);
+    if (open) markRef.current?.classList.remove("is-hidden");
     if (!open) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
@@ -98,7 +107,7 @@ export function Nav() {
         </button>
       </div>
 
-      <div className="menu" id="menu" aria-hidden={!open} inert={!open}>
+      <div className="menu" id="menu" aria-hidden={!open} inert={!open} data-lenis-prevent>
         <span className="menu__watermark" aria-hidden="true">
           oj.dzn
         </span>
@@ -116,7 +125,10 @@ export function Nav() {
                 style={{ transitionDelay: open ? `${150 + i * 55}ms` : "0ms" }}
               >
                 <span className="menu__n">0{i + 1}</span>
-                <span className="menu__label">{l.label}</span>
+                <span className="menu__text">
+                  <span className="menu__label">{l.label}</span>
+                  <small className="menu__desc">{l.note}</small>
+                </span>
                 <Arrow className="menu__arrow" />
               </a>
             ))}
@@ -133,6 +145,10 @@ export function Nav() {
               {links[active].note}
             </p>
           </div>
+        </div>
+
+        <div className="menu__mcta wrap">
+          <CtaButton>Start your project</CtaButton>
         </div>
 
         <div className="menu__foot wrap">
