@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-export const viewport: Viewport = { themeColor: "#333333" };
+export const viewport: Viewport = { themeColor: "#191919" };
 
 const jsonLd = {
   "@context": "https://schema.org",

@@ -56,7 +56,7 @@ export function Nav() {
           ))}
         </nav>
         <div className="menu__foot wrap">
-          <CtaButton variant="light">Book a free 30-min call</CtaButton>
+          <CtaButton>Book a free 30-min call</CtaButton>
           <div className="menu__contact">
             <a href={`mailto:${site.email}`}>{site.email}</a>
             {site.socials.map((s) => (

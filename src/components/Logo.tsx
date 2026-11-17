@@ -7,21 +7,10 @@ export function BoltMark({ size = 32, className }: { size?: number; className?: 
   );
 }
 
-/** App-icon version of the mark: cream circle on a charcoal rounded square. */
-export function BoltIcon({ size = 34 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 512 512" aria-hidden="true">
-      <rect width="512" height="512" rx="110" fill="#333333" />
-      <circle cx="256" cy="256" r="210" fill="#EFE1CE" />
-      <path fill="#333333" d="M298 62 139 278h108l-38 164 159-218H266z" />
-    </svg>
-  );
-}
-
 export function Logo({ dark = false }: { dark?: boolean }) {
   return (
     <span className={`logo ${dark ? "logo--dark" : ""}`}>
-      {dark ? <BoltMark size={34} /> : <BoltIcon size={34} />}
+      <BoltMark size={34} />
       <span className="logo__word">
         oj<span className="logo__dot">.</span>dzn
       </span>
