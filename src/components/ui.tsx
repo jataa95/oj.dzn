@@ -9,28 +9,39 @@ export function Arrow({ className }: { className?: string }) {
   );
 }
 
-/** Black pill button with a detached round arrow "bubble" — primary CTA. */
+/** Shared inner markup: a rolling label and an arrow that shoots out on hover. */
+export function CtaInner({ children }: { children: string }) {
+  return (
+    <>
+      <span className="cta__label">
+        <span className="cta__roll" data-text={children}>
+          {children}
+        </span>
+      </span>
+      <span className="cta__icon" aria-hidden="true">
+        <Arrow className="cta__arrow" />
+        <Arrow className="cta__arrow cta__arrow--next" />
+      </span>
+    </>
+  );
+}
+
+/** Primary call to action: one pill with a rolling label and a circular arrow. */
 export function CtaButton({
   href = site.calendly,
   children = "Book a free call",
-  variant = "dark",
+  variant = "solid",
   external = true,
 }: {
   href?: string;
-  children?: ReactNode;
-  variant?: "dark" | "light";
+  children?: string;
+  variant?: "solid" | "outline" | "dark" | "light";
   external?: boolean;
 }) {
+  const v = variant === "light" ? "outline" : variant === "dark" ? "solid" : variant;
   return (
-    <a
-      className={`cta cta--${variant}`}
-      href={href}
-      {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-    >
-      <span className="cta__bubble">
-        <Arrow />
-      </span>
-      <span className="cta__label">{children}</span>
+    <a className={`cta cta--${v}`} href={href} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
+      <CtaInner>{children}</CtaInner>
     </a>
   );
 }

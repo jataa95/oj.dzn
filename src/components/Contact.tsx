@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { site } from "@/content/site";
 import { Logo } from "./Logo";
-import { Arrow, CtaButton, Corners, whatsappLink } from "./ui";
+import { CtaButton, CtaInner, Corners, whatsappLink } from "./ui";
 
 const budgets = ["Not sure yet", "Under ₦500k", "₦500k – ₦1.5m", "₦1.5m – ₦3m", "₦3m+"];
 const types = ["New website", "Redesign", "Online shop", "Portfolio", "Landing page", "Graphics"];
@@ -83,11 +83,8 @@ export function Contact() {
                 <textarea name="message" rows={3} placeholder="What you do, who it's for, and what the website should achieve." />
               </label>
             </div>
-            <button className="brief__send" type="submit">
-              <span className="cta__bubble">
-                <Arrow />
-              </span>
-              <span>{sent ? "Opening your email app…" : "Send brief"}</span>
+            <button className="cta cta--solid brief__send" type="submit">
+              <CtaInner>{sent ? "Opening your email app…" : "Send brief"}</CtaInner>
             </button>
           </form>
         </div>
