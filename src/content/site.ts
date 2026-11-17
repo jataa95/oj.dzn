@@ -279,5 +279,3 @@ export const faqs = [
 
 export const industries = ["Real estate", "Fashion labels", "Interior studios", "Fine artists", "Churches", "Streetwear", "Painters", "Personal brands"];
 
-// Second line of the hero headline ("Turn visitors / into …."), rotated in order.
-export const heroWords = ["into customers", "into clients", "into bookings", "into buyers"];

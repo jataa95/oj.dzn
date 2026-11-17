@@ -1,20 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import { heroWords, projects } from "@/content/site";
+import { useEffect, useRef } from "react";
+import { projects } from "@/content/site";
 import { CtaButton } from "./ui";
 import { LagosTime } from "./Nav";
-
-function useCycle(length: number, ms: number) {
-  const [i, setI] = useState(0);
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const t = setInterval(() => setI((n) => (n + 1) % length), ms);
-    return () => clearInterval(t);
-  }, [length, ms]);
-  return i;
-}
 
 /** Columns for the background wall: alternate desktop and mobile shots, offset per column. */
 const columns = Array.from({ length: 6 }, (_, c) =>
@@ -26,7 +16,6 @@ const columns = Array.from({ length: 6 }, (_, c) =>
 );
 
 export function Hero() {
-  const w = useCycle(heroWords.length, 2800);
   const ref = useRef<HTMLElement>(null);
 
   // Pointer parallax for the wall + a soft spotlight that follows the cursor.
@@ -76,28 +65,19 @@ export function Hero() {
         <h1 className="hero__title">
           <span className="line">
             <span className="line__in" style={{ "--e": 0 } as React.CSSProperties}>
-              Turn visitors
+              Stand out.
             </span>
           </span>
           <span className="line">
-            <span className="line__in" style={{ "--e": 2 } as React.CSSProperties}>
-              <span className="rotator">
-                <span className="sr-only">{heroWords[0]}</span>
-                <span className="rotator__track" aria-hidden="true">
-                  {heroWords.map((word, n) => (
-                    <span key={word} className={`rotator__word ${n === w ? "is-active" : ""} ${n === (w - 1 + heroWords.length) % heroWords.length ? "is-leaving" : ""}`}>
-                      {word}.
-                    </span>
-                  ))}
-                </span>
-              </span>
+            <span className="line__in" style={{ "--e": 1 } as React.CSSProperties}>
+              <span className="hero__soft">Get chosen.</span>
             </span>
           </span>
         </h1>
 
         <p className="hero__lede enter" style={{ "--e": 3 } as React.CSSProperties}>
-          We&apos;re a web design and development studio in Lagos. We design and build fast, premium websites for brands, artists and
-          businesses that want to be taken seriously online.
+          In a market full of templates, we design and build premium websites that make your brand the obvious choice, then make it easy to
+          say yes.
         </p>
         <div className="hero__ctas enter" style={{ "--e": 4 } as React.CSSProperties}>
           <CtaButton>Start your project</CtaButton>
