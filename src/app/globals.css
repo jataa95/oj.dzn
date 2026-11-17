@@ -1097,7 +1097,7 @@ html.preloading .enter {
   display: flex;
   align-items: center;
   gap: 12px;
-  max-width: 470px;
+  max-width: 620px;
 }
 .problem__paren {
   font-size: clamp(40px, 5vw, 70px);

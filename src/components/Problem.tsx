@@ -15,7 +15,7 @@ export function Problem() {
           <Corners />
         </div>
         <h2 id="problem-title" className="problem__left">
-          Is your website quietly
+          Still doing business
         </h2>
         <div className="problem__pills">
           <span className="problem__paren">(</span>
@@ -29,7 +29,7 @@ export function Problem() {
           <span className="problem__paren">)</span>
         </div>
         <p className="problem__right" aria-hidden="false">
-          costing you clients?
+          without a website?
         </p>
       </div>
     </section>

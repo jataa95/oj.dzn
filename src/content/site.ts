@@ -120,16 +120,16 @@ export const projects: Project[] = [
 ];
 
 export const painPoints = [
-  "Looks like a template",
-  "Slow on mobile",
-  "Clients DM to ask the price",
-  "Nowhere on Google",
-  "Outdated photos",
-  "No clear next step",
-  "Built years ago",
-  "Lost in a link-in-bio",
-  "Too shy to share the link",
-  "Looks cheaper than you are",
+  "“Do you have a website?”",
+  "Sending prices one DM at a time",
+  "Only findable on Instagram",
+  "Invisible on Google",
+  "Competitors look more legit",
+  "Answering the same questions daily",
+  "Bookings lost in WhatsApp chats",
+  "Nowhere to show your best work",
+  "Living on referrals alone",
+  "Looks smaller than you are",
 ];
 
 export type ServiceStage = {
