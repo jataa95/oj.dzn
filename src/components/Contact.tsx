@@ -31,8 +31,6 @@ export function Contact() {
 
   return (
     <section className="contact" id="contact" aria-labelledby="contact-title">
-      <div className="contact__halftone contact__halftone--l" aria-hidden="true" />
-      <div className="contact__halftone contact__halftone--r" aria-hidden="true" />
       <div className="contact__card">
         <div className="contact__main">
           <Corners />

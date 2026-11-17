@@ -18,7 +18,7 @@ export function Packages() {
         <div className="packages__grid">
           {packages.map((p, i) => (
             <Reveal key={p.name} delay={i * 100} className={`pkg ${p.featured ? "pkg--featured" : ""}`}>
-              <div className={`pkg__head tone-${p.tone}`}>
+              <div className="pkg__head">
                 {p.featured && <Hand className="pkg__flag">Most popular</Hand>}
                 <h3>{p.name}</h3>
                 <p>{p.for}</p>

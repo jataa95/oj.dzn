@@ -1,35 +1,34 @@
 import type { Metadata, Viewport } from "next";
-import { Inter_Tight, Caveat, Cinzel } from "next/font/google";
+import { Inter_Tight, Caveat } from "next/font/google";
 import { site, projects, faqs } from "@/content/site";
 import "./globals.css";
 
 const sans = Inter_Tight({ variable: "--font-sans", subsets: ["latin"], display: "swap" });
 const hand = Caveat({ variable: "--font-hand", subsets: ["latin"], weight: ["500", "600"], display: "swap" });
-const brand = Cinzel({ variable: "--font-brand", subsets: ["latin"], weight: ["700", "800"], display: "swap" });
 
-const title = "OJ.DZN — Premium websites for brands that want to be taken seriously";
+const title = "oj.dzn — Premium websites for brands that want to be taken seriously";
 const description =
   "Ohjay (Olajide Oladunni) designs and builds fast, editorial websites for Nigerian brands, artists and businesses — built to turn visitors into enquiries, orders and bookings.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: title, template: "%s — OJ.DZN" },
+  title: { default: title, template: "%s — oj.dzn" },
   description,
-  keywords: ["web designer Lagos", "web developer Nigeria", "Next.js developer", "premium website design", "portfolio", "OJ.DZN", "Ohjay"],
+  keywords: ["web designer Lagos", "web developer Nigeria", "Next.js developer", "premium website design", "portfolio", "oj.dzn", "Ohjay"],
   authors: [{ name: site.person }],
-  openGraph: { title, description, url: site.url, siteName: "OJ.DZN", type: "website", locale: "en_NG" },
+  openGraph: { title, description, url: site.url, siteName: "oj.dzn", type: "website", locale: "en_NG" },
   twitter: { card: "summary_large_image", title, description, creator: "@themanJayyy" },
   alternates: { canonical: "/" },
 };
 
-export const viewport: Viewport = { themeColor: "#1e1e1e" };
+export const viewport: Viewport = { themeColor: "#333333" };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "ProfessionalService",
-      name: "OJ.DZN",
+      name: "oj.dzn",
       url: site.url,
       email: site.email,
       areaServed: "Worldwide",
@@ -47,7 +46,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${sans.variable} ${hand.variable} ${brand.variable}`}>
+    <html lang="en" className={`${sans.variable} ${hand.variable}`}>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         {children}

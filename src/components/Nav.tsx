@@ -11,6 +11,7 @@ const links = [
   { href: "#process", label: "Process" },
   { href: "#packages", label: "Packages" },
   { href: "#faq", label: "FAQ" },
+  { href: "#contact", label: "Contact" },
 ];
 
 export function Nav() {
@@ -26,40 +27,44 @@ export function Nav() {
 
   useEffect(() => {
     document.documentElement.classList.toggle("menu-open", open);
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
   return (
     <header className={`nav ${scrolled ? "nav--scrolled" : ""} ${open ? "nav--open" : ""}`}>
-      <div className="nav__bar">
-        <a href="#top" className="nav__logo" aria-label="OJ.DZN home" onClick={() => setOpen(false)}>
-          <Logo />
+      <div className="nav__bar wrap">
+        <a href="#top" className="nav__logo" aria-label="oj.dzn home" onClick={() => setOpen(false)}>
+          <Logo dark={open} />
         </a>
-        <nav className="nav__links" aria-label="Main">
-          {links.map((l) => (
-            <a key={l.href} href={l.href}>
-              {l.label}
-            </a>
-          ))}
-        </nav>
-        <div className="nav__cta">
-          <CtaButton>Book a call</CtaButton>
-        </div>
-        <button className="nav__toggle" aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen((o) => !o)}>
+        <button className="nav__toggle" aria-expanded={open} aria-controls="menu" onClick={() => setOpen((o) => !o)}>
           <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
           <i />
           <i />
         </button>
       </div>
-      <div className="nav__sheet" id="mobile-menu" hidden={!open}>
-        {links.map((l, i) => (
-          <a key={l.href} href={l.href} onClick={() => setOpen(false)} style={{ transitionDelay: `${i * 40}ms` }}>
-            <span>0{i + 1}</span>
-            {l.label}
-          </a>
-        ))}
-        <div className="nav__sheet-foot">
-          <CtaButton>Book a free 30-min call</CtaButton>
-          <a href={`mailto:${site.email}`}>{site.email}</a>
+
+      <div className="menu" id="menu" aria-hidden={!open} inert={!open}>
+        <nav className="menu__links wrap" aria-label="Main">
+          {links.map((l, i) => (
+            <a key={l.href} href={l.href} onClick={() => setOpen(false)} style={{ transitionDelay: open ? `${120 + i * 50}ms` : "0ms" }}>
+              <span>0{i + 1}</span>
+              {l.label}
+            </a>
+          ))}
+        </nav>
+        <div className="menu__foot wrap">
+          <CtaButton variant="light">Book a free 30-min call</CtaButton>
+          <div className="menu__contact">
+            <a href={`mailto:${site.email}`}>{site.email}</a>
+            {site.socials.map((s) => (
+              <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer">
+                {s.label}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </header>

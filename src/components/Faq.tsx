@@ -4,7 +4,7 @@ import { Reveal } from "./Reveal";
 
 export function Faq() {
   return (
-    <section className="faq gridbg" id="faq" aria-labelledby="faq-title">
+    <section className="faq" id="faq" aria-labelledby="faq-title">
       <div className="wrap faq__inner">
         <div className="faq__head">
           <Hand>FAQ</Hand>

@@ -41,7 +41,7 @@ export function Work() {
                     Visit live site <Arrow />
                   </a>
                 </div>
-                <a className={`case__visual tone-${p.tone}`} href={p.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${p.name} live site`}>
+                <a className="case__visual" href={p.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${p.name} live site`}>
                   <span className="case__desk">
                     <Image src={`/work/${p.slug}-desktop.webp`} alt={`${p.name} desktop homepage`} fill sizes="(max-width: 900px) 90vw, 600px" />
                   </span>

@@ -5,7 +5,7 @@ import { Shape } from "./Shapes";
 
 export function Services() {
   return (
-    <section className="services gridbg" id="services" aria-labelledby="services-title">
+    <section className="services" id="services" aria-labelledby="services-title">
       <div className="wrap">
         <div className="section-head">
           <Hand>What&apos;s included</Hand>
@@ -26,7 +26,7 @@ export function Services() {
               </div>
               <ul className="services__tiles">
                 {stage.items.map((item, n) => (
-                  <Reveal as="li" key={item.name} delay={n * 90} className={`stile tone-${item.tone}`}>
+                  <Reveal as="li" key={item.name} delay={n * 90} className="stile">
                     <span className="stile__name">{item.name}</span>
                     {item.note && <Hand className="stile__note">{item.note}</Hand>}
                     <Shape name={item.shape} className="stile__shape" />

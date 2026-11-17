@@ -1,7 +1,7 @@
 // All copy, links and project data live here so the site is easy to update.
 
 export const site = {
-  name: "OJ.DZN",
+  name: "oj.dzn",
   person: "Olajide Oladunni",
   nickname: "Ohjay",
   role: "Web designer & developer",
@@ -186,7 +186,7 @@ export const services: ServiceStage[] = [
 ];
 
 export const comparison = {
-  columns: ["DIY template", "Big agency", "OJ.DZN"],
+  columns: ["DIY template", "Big agency", "oj.dzn"],
   rows: [
     { label: "Custom design for your brand", values: [false, true, true] },
     { label: "One person from brief to launch", values: [false, false, true] },

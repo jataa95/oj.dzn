@@ -39,7 +39,7 @@ export function Statement() {
   }, []);
 
   return (
-    <section className="statement gridbg" aria-label="What I do">
+    <section className="statement" aria-label="What I do">
       <div className="wrap statement__inner">
         <Hand className="statement__hand">What I do</Hand>
         <p ref={ref} className="statement__text">

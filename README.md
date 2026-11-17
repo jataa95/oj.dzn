@@ -1,4 +1,4 @@
-# OJ.DZN — Portfolio
+# oj.dzn — Portfolio
 
 The portfolio of Ohjay (Olajide Oladunni): premium websites for brands, artists and businesses.
 
