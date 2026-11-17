@@ -20,7 +20,7 @@ export function Process() {
         </div>
         <ol className="process__cards">
           {steps.map((s, i) => (
-            <Reveal as="li" key={s.n} delay={i * 120} className="pcard">
+            <Reveal as="li" key={s.n} className="pcard stack-card" style={{ "--i": i } as React.CSSProperties}>
               <div className="pcard__top">
                 <span className="pcard__n">{s.n}</span>
                 <h3 className="pcard__step">{s.title}</h3>

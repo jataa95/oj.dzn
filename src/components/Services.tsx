@@ -18,8 +18,8 @@ export function Services() {
         </div>
 
         <div className="services__rows">
-          {services.map((stage) => (
-            <div key={stage.tag} className="services__row">
+          {services.map((stage, i) => (
+            <div key={stage.tag} className="services__row stack-card" style={{ "--i": i } as React.CSSProperties}>
               <div className="services__stage">
                 <span className="tag">{stage.tag}</span>
                 <p>{stage.title}</p>

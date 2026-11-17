@@ -17,7 +17,7 @@ export function Packages() {
         </div>
         <div className="packages__grid">
           {packages.map((p, i) => (
-            <Reveal key={p.name} delay={i * 100} className={`pkg ${p.featured ? "pkg--featured" : ""}`}>
+            <Reveal key={p.name} className={`pkg stack-card ${p.featured ? "pkg--featured" : ""}`} style={{ "--i": i } as React.CSSProperties}>
               <div className="pkg__head">
                 {p.featured && <span className="pkg__flag">Most popular</span>}
                 <h3>{p.name}</h3>
